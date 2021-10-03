@@ -19,6 +19,7 @@ namespace SomeStore.Data
         public ContextDB(DbContextOptions<ContextDB> options): base(options)
         {
             InitValues();
+            Database.EnsureCreated();
         }
         private void InitValues()
         {

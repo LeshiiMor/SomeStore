@@ -30,7 +30,7 @@ namespace SomeStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ContextDB>(options => options.UseMySql(
-                "server=localhost;user=root;password=admin;database=some_store;",
+                Configuration.GetConnectionString("DefaultConnection"),
                 new MySqlServerVersion(new Version(8,0,21)))
             );
 
