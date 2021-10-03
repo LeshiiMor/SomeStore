@@ -1,0 +1,72 @@
+﻿@model SomeStore.ViewModels.ShopCartViewModel
+@{ 
+    ViewData["Title"] = "Корзина";
+}
+<div class="cart-info-block text-center m-5">
+    <h4>Сумма заказа :<span id="finalsumm-span">@Model.FinalPrice</span></h4>
+    <button class="btn btn-success mt-3" id="acceptOrderBTN">Оформить заказ</button>
+</div>
+<div class="cart-cont">
+    <div class="cart-item">
+        <div class="container-fluid">
+            @if (Model.ShopCart.ShopCartItems.Count > 0)
+            {
+                @foreach (var prod in Model.ShopCart.ShopCartItems)
+                {
+                    <div class="row cart-row" data-prodid="@prod.ProductId">
+                        <div class="col-2 cart-col">
+                            <div class="cart-item-img-cont">
+                                <img class="cart-item-img img-fluid rounded" src="@prod.Product.ImageURL" />
+                            </div>
+                        </div>
+                        <div class="col-7 cart-col">
+                            <div class="cart-item-dis">
+                                <h5>@prod.Product.Name</h5>
+                                <p class="cart-disProd">
+                                    @prod.Product.Description
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-3 cart-col">
+                            <div class="cart-item-btn-block">
+                                <input type="text" class="inp-cart-idProd" value="@prod.Product.Id" hidden />
+                                <div class="cart-item-btn-block-del">
+                                    <button class="cart-item-delbtn">
+                                        <i class="material-icons">delete</i>
+                                    </button>
+                                </div>
+                                <div class="cart-item-btn-block-amount">
+                                    <div class="amount-btn-block">
+                                        <div class="number">
+                                            <button class="number-minus" type="button">-</button>
+                                            <input type="number" min="1" value="1" readonly>
+                                            <button class="number-plus" type="button">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cart-item-btn-block-price">
+                                    <div class="cart-price-block text-center"><span data-idprod="@prod.ProductId">@prod.Product.Price</span> р.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            }
+            else
+            {
+                <h1 class="text-center">Пусто</h1>
+            }
+        </div>
+        <!--start Toast -->
+        <div class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Hello, world! This is a toast message.
+                </div>
+                <button type="button" class="btn-close-toast" data-bs-dismiss="toast" aria-label="Close">X</button>
+            </div>
+        </div>
+        <!--end  Toast -->
+    </div>
+</div>

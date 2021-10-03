@@ -1,0 +1,32 @@
+﻿@model SomeStore.ViewModels.PersonalInfoViewModel
+<div class="">
+    <form id="personalInfoForm" class="mt-5">
+        <div class="mb-3">
+            <label for="inp-name" class="form-label" >Имя</label>
+            <input id="inp-name" type="text" asp-for="Name" class="form-control" placeholder="Имя"/>
+        </div>
+        <div class="mb-3">
+            <label>Фамилия</label>
+            <input id="inp-surname" type="text" asp-for="Surname" class="form-control" placeholder="Фамилия" />
+        </div>
+        <div class="mb-3">
+            <label>Отчество</label>
+            <input id="inp-patron" type="text" asp-for="Patronymic" class="form-control" placeholder="Отчество" />
+        </div>
+        <div class="mb-3">
+            <label>Email</label>
+            <input id="inp-email" type="email" asp-for="Email" class="form-control" placeholder="Email" />
+        </div>
+        <div class="mb-3">
+            <label>Телефон</label>
+            <input id="inp-phone" type="text" asp-for="PhoneNumber" class="form-control" placeholder="375 29 306 40 34"/>
+        </div>
+        <div id="message-box" class="text-white">
+            
+        </div>
+        <div class="mt-5 text-center">
+            <button type="button" class="btn btn-savedopinfo rounded-pill" onclick="UpdatePersonalInfo()">Сохранить изменения</button>
+            <button type="button" class="btn btn-danger rounded-pill">Сбросить</button>
+        </div>
+    </form>
+</div>

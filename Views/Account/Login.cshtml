@@ -1,0 +1,27 @@
+﻿@model SomeStore.ViewModels.AuthViewModel
+@{ 
+    ViewData["Title"] = "Авторизация";
+}
+<div class="text-center login-block">
+    <h1 class="m-4">SomeStore</h1>
+    <form id="signinform" method="post" asp-controller="Account" asp-action="Login">
+        <div class="login-form-block mb-3 text-center">
+            <input asp-for="UserName" name="UserName" type="text" id="loginInput" class="login-input form-control" placeholder="Логин" />
+        </div>
+        <div class="login-form-block mb-3">
+            <input asp-for="Password" name="Password" type="password" id="pasInput" class="login-input form-control" placeholder="Пароль" />
+        </div>
+        <div class="login-form-block mb-3">
+            <input name="ReentryPassword" asp-for="ReentryPassword" type="password" id="rePasInput" class="login-input form-control" placeholder="Повтор пароля"/>
+        </div>
+        <div id="message-box" class="login-form-block bg-danger text-white">Текст</div>
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="mb-3">
+            <button type="button" id="logBtn" class="login-btn btn rounded-pill">Войти</button>
+            <button type="button" onclick="RegistrationUser()" class="login-btn btn rounded-pill">Регистрация</button>
+            <div>
+                <button type="button" id="btn-backtolog" onclick="ShowLoginUser()">Назад</button>
+            </div>
+        </div>
+    </form>
+</div>

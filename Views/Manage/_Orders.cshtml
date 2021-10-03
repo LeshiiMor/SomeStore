@@ -1,0 +1,136 @@
+﻿@model SomeStore.ViewModels.ManageOrdersViewModel
+<div class="container-fluid manageorder-cont">
+    @if (Model.Orders.Count() > 0)
+    {
+        @foreach (var prod in Model.Orders)
+        {
+    <div class="row cart-row" data-id="@prod.ProductId">
+        <div class="col-4 cart-col">
+            <div class="cart-item-img-cont">
+                <img class="cart-item-img img-fluid rounded" src="@prod.Product.ImageURL" />
+            </div>
+        </div>
+        <div class="col-5 cart-col">
+            <div class="cart-item-dis">
+                <h5><a asp-controller="Product" asp-action="ProductCard" asp-route-id="@prod.Product.Id">@prod.Product.Name</a></h5>
+                <p class="cart-disProd">
+                    @prod.Product.Description
+                </p>
+            </div>
+        </div>
+        <div class="col-3 cart-col">
+            <div class="cart-item-btn-block">
+                <div class="cart-item-btn-block-del">
+                    <button class="btn btn-warning" onclick="OpenModelOrder(@prod.Id)">Подробнее</button>
+                </div>
+                <div class="cart-item-btn-block-amount">
+                    <div class="amount-btn-block">
+
+                    </div>
+                </div>
+                <div class="cart-item-btn-block-price">
+                    <div class="cart-price-block text-center">Цена : @prod.FinalPrice р.</div>
+                </div>
+            </div>
+        </div>
+        @if (prod.Status == 0)
+        {
+            <span class="p-1 rounded-pill text-white bg-warning">
+                На рассмотрении
+            </span>
+        }
+        else if (prod.Status == 1)
+        {
+            <span class="p-1 rounded-pill text-white bg-success">
+                Принят
+            </span>
+        }
+        else if (prod.Status == 2)
+        {
+            <span class="p-1 rounded-pill text-white bg-danger">
+                Отказ
+            </span>
+        }
+    </div>
+
+        }
+    }
+    else
+    {
+        <h4 class="text-center">Пусто</h4>
+    }
+</div>
+
+<!--Start modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title" id="exampleModalLabel">Заказ <span id="span-orderID"></span></h5>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col text-center">
+                            <div class="m-3">
+                                <h3>Заказчик :</h3>
+                                <p>
+                                    <span id="nameZak">name</span>
+                                    <span id="surnameZak">surname</span>
+                                    <span id="patronZak">patron</span>
+                                </p>
+                                <p>
+                                    <h5>Телефон</h5>
+                                    <span id="phoneZak">+333 33 333 33 33</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col text-center">
+                            <div class="m-3">
+                                <h3>Продукт :</h3>
+                                <p>
+                                    <span id="nameProd">Name product</span> <br />
+                                    <span id="catProd">category</span> <br />
+                                </p>
+                                <p>
+                                    <h5>Цена</h5>
+                                    <span id="priceProd">100</span> р.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="m-3">
+                                <h3 class="text-center">Информация о заказе</h3>
+                                <div class="m-2">
+                                    <h5>Общая цена</h5>
+                                    <span id="orderFinalPrice">1000</span>
+                                </div>
+                                <div class="m-2">
+                                    <h5>Кол-во продукта : </h5>
+                                    <span id="amountOrderProd">1000</span>
+                                </div>
+                                <div class="m-2">
+                                    <h5>Дата подачи заказа : </h5>
+                                    <span id="dateOrder">18/12/2021</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div id="message-box" class="text-white"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary" onclick="CompleteOrder()">Подтвердить заказ</button>
+                <button type="button" class="btn btn-danger"onclick="CancelOrder()">Отменить заказ</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End model-->

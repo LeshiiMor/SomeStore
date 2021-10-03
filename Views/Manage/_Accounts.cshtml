@@ -1,0 +1,84 @@
+﻿@model SomeStore.ViewModels.AdminAccountsViewModel
+<div class="admin-acc-headerblock text-center">
+    <h2>Accounts</h2>
+</div>
+<div class="admin-acc-searchblock m-4">
+    <input type="text" class="admin-acc-inputSearch" placeholder="Username пользователя" />
+    <select class="admin-acc-selectlist" asp-items="Model.RolesList">
+        <option value="0">Все</option>
+    </select>
+    <button id="admin-acc-btnsearch" onclick="LoadFiltUser()">Найти</button>
+</div>
+<div class="admin-acc-tableblock">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Имя</th>
+                <th scope="col">Фамилия</th>
+                <th scope="col">Отчество</th>
+                <th scope="col">Email</th>
+                <th scope="col">Роль</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            @foreach (var user in Model.Users)
+            {
+                <tr class="table-row">
+                    <th class="hide" data-id="@user.Id"></th>
+                    <td>@user.Name</td>
+                    <td>@user.Surname</td>
+                    <td>@user.Patronymic</td>
+                    <td>@user.Email</td>
+                    <td>@user.Role.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!--Start modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title" id="exampleModalLabel">Пользователь <span id="span-username"></span></h5>
+            </div>
+            <div class="modal-body">
+                <form id="admin-acc-modalform">
+                    <input type="text" class="hide" name="id"/>
+                    <div class="m-3">
+                        <input type="text" name="name" class="form-control" placeholder="Имя" />
+                    </div>
+                    <div class="m-3">
+                        <input type="text" name="surname" class="form-control" placeholder="Фамилия" />
+                    </div>
+                    <div class="m-3">
+                        <input type="text" name="patron" class="form-control" placeholder="Отчество" />
+                    </div>
+                    <div class="m-3">
+                        <input type="text" name="email" class="form-control" placeholder="Email" />
+                    </div>
+                    <div class="m-3">
+                        <input type="text" name="phone" class="form-control" placeholder="Телефон" />
+                    </div>
+                    <div class="m-3">
+                        <span class="m-2">Роли</span><br />
+                        @foreach (var role in Model.Roles)
+                        {
+                            <input type="radio" name="role" class="m-2" id="@role.Name" value="@role.Id"/><label for="@role.Name">@role.Name</label><br />
+                        }
+                    </div>
+                </form>
+                <div id="message-box" class="text-white">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary" onclick="UpdateUserInfo()">Сохранить изменения</button>
+                <button type="button" class="btn btn-danger" onclick="DeleteUser()">Удалить</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End model-->

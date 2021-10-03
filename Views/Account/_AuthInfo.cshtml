@@ -1,0 +1,53 @@
+﻿<div>
+    <form class="m-4">
+        <div class="mb-3">
+            <h4>Логин</h4>
+            <div class="m-3">
+                <label>Логин</label>
+                <input id="inp-log" class="form-control" type="text" value="@User.Identity.Name" disabled />
+            </div>
+            <div class="lognew-block">
+                <div class="m-3">
+                    <label>Новый логин:</label>
+                    <input id="inp-log-new" class="form-control" type="text" />
+                </div>
+                <div class="m-3">
+                    <label>Пароль:</label>
+                    <input id="inp-log-pas" class="form-control" type="password" />
+                </div>
+            </div>
+            <div class="m-3">
+                <button type="button" class="btn btn-savedopinfo rounded-pill" onclick="ChangeLogin()">Изменить логин</button>
+                <button id="btn-cancelchLog" type="button" class="btn btn-danger rounded-pill" onclick="CancelChangeLog()">Отменить</button>
+            </div>
+        </div>
+    </form>
+    <form class="m-4">
+        <div class="mb-3">
+            <h4>Смена пароля</h4>
+            <div class="m-3">
+                <label>Старый пароль</label>
+                <input id="inp-pas-old" class="form-control" type="password" />
+            </div>
+            <div class="m-3">
+                <label>Новый пароль</label>
+                <input id="inp-pas-new" class="form-control" type="password" />
+            </div>
+            <div class="m-3">
+                <button type="button" class="btn btn-savedopinfo rounded-pill" onclick="ChangePassword()">Изменить пароль</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!--start Toast -->
+<div class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+        <div class="toast-body">
+            Hello, world! This is a toast message.
+        </div>
+        <button type="button" class="btn-close-toast" data-bs-dismiss="toast" aria-label="Close">X</button>
+    </div>
+</div>
+
+<!--end  Toast -->

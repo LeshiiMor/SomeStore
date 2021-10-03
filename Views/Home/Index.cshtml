@@ -1,0 +1,33 @@
+﻿@model List<Product> 
+@{
+    ViewData["Title"] = "SomeStore";
+}
+<div class="text-center">
+    <h1 class="display-4" id="text-welcome">Welcome to SomeStore @if (User.Identity.IsAuthenticated) { @User.Identity.Name; }</h1>
+</div>
+<div class="text-center">
+    <h4 class="text-home">Лучшее только у нас</h4>
+</div>
+@if (Model.Count > 0)
+{
+    <div class="product-container">
+        @foreach (var product in Model)
+        {
+                    <div class="product-card">
+                        <img src="@product.ImageURL" class="img-fluid img-product" title="@product.Name" />
+                        <div class="product-card-infodiv">
+                            <h4 class="h4-product">@product.Name</h4>
+                            <p class="mt-3"><strong>@product.Price  <span style="color: rgb(255, 128, 43);">&#36;</span></strong></p>
+                            <input name="product_id" type="hidden" value="@product.Id" />
+                            <a asp-controller="Product" asp-action="ProductCard" asp-route-id="@product.Id">Подробнее</a>
+                        </div>
+                    </div>
+        }
+    </div>
+}
+else
+{
+    <div class="container text-center">
+        <p class="text-dark" style="font-size:20px; color:gray; margin-top:50px;margin-bottom:50px;opacity:0.6;">Лучших товаров не обнаруженно &#128532;</p>
+    </div>
+}

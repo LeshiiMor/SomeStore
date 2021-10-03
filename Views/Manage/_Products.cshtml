@@ -1,0 +1,76 @@
+﻿@model SomeStore.ViewModels.ManageProductsViewModel
+<div class="admin-acc-headerblock text-center">
+    <h2>Products</h2>
+</div>
+<div class="admin-acc-searchblock m-4">
+    <input type="text" class="admin-acc-inputSearch" placeholder="Название продукта" />
+    <select class="admin-acc-selectlist" asp-items="Model.Categories">
+        <option value="0">Все</option>
+    </select>
+    <button id="admin-acc-btnsearch" onclick="FiltrProductTable()">Найти</button>
+    <a id="admin-prod-create" class="text-center mt-3" asp-controller="Product" asp-action="Create">Создать</a>
+</div>
+<div class="admin-acc-tableblock">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Название</th>
+                <th scope="col">Категория</th>
+                <th scope="col">Цена</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            @foreach (var user in Model.Products)
+            {
+                <tr class="table-row-product">
+                    <th class="hide" data-id="@user.Id"></th>
+                    <td>@user.Name</td>
+                    <td>@user.Category.Name</td>
+                    <td>@user.Price р.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!--Start modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title" id="exampleModalLabel">Продукт c кодом <span id="span-username"></span></h5>
+            </div>
+            <div class="modal-body">
+                <form id="admin-acc-modalform">
+                    <input type="text" class="hide" name="id" />
+                    <div class="m-3">
+                        <input type="text" name="name" class="form-control" placeholder="Название" />
+                    </div>
+                    <div class="m-3">
+                        <input type="text" name="dis" class="form-control" placeholder="Описание" />
+                    </div>
+                    <div class="m-3">
+                        <input type="number" name="price" class="form-control" placeholder="Цена" />
+                    </div>
+                    <div class="m-3">
+                        <label for="checkFav">Отбражать на главной странице ?</label>
+                        <input type="checkbox" id="checkFav" name="favourite" class="form-check"/>
+                    </div>
+                    <div class="m-3">
+                        <span class="m-2">Категории</span><br />
+                        <select class="admin-acc-selectlist" asp-items="Model.Categories"></select>
+                    </div>
+                </form>
+                <div id="message-box" class="text-white">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary" onclick="UpdateProduct()">Сохранить изменения</button>
+                <button type="button" class="btn btn-danger" onclick="DeleteProduct()">Удалить</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End model-->

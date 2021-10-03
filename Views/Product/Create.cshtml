@@ -1,0 +1,80 @@
+﻿@model SomeStore.ViewModels.CreateProductViewModel
+@{ 
+    ViewData["Title"] = "Создание нового продутка";
+}
+<div class="container text-center">
+    <h1 class="mb-5">Добавление нового продукта</h1>
+    <div class="d-flex justify-content-center">
+        <form method="post" asp-action="Create" asp-controller="Product" class="form-create-prod" enctype="multipart/form-data">
+            <div class="mb-3">
+                <img src="" class="rounded-circle w-50" id="prodImg" title="product photo" />
+            </div>
+            <div class="mb-3">
+                <div class="file-block">
+                    <input asp-for="ProductPhoto" type="file" id="input-file" class="form-control d-none" onchange="updatePicture(this)" />
+                    <label for="input-file" class="form-label">
+                        <div class="div-labelfile">
+                            <img src="~/img/paperClipIcon.svg" id="paperIcon" />
+                            <img src="~/img/completeIcon.svg" id="completeIcon" /><br />
+                            <span id="labelfile-text">Добавить файл</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="prodName">Название продукта</label>
+                <input type="text" asp-for="NameProduct" id="prodName" class="form-control" required />
+                <span asp-validation-for="NameProduct"></span>
+            </div>
+            <div class="mb-3">
+                <label for="desProduct" class="form-label">Описание продукта</label>
+                <textarea id="desProduct" asp-for="Description" class="form-control" required></textarea>
+                <span asp-validation-for="Description"></span>
+            </div>
+            <div class="mb-3">
+                <label for="prodPrice">Цена продукта</label>
+                <input type="number" step="any" asp-for="Price" id="prodPrice" class="form-control" required />
+                <span asp-validation-for="Price"></span>
+            </div>
+            <div class="mb-3">
+                <label for="categoriesSelect" class="form-label">Категория продукта</label>
+                <select id="categoriesSelect" class="form-control" asp-for="CategoryId" asp-items="Model.Categories">
+                    @if (Model.Categories.Count() == 0)
+                    {
+                        <option value="0">Пусто</option>
+                    }
+                </select>
+                <div id="categoryAddHelper" class="text-left">
+                    Нет подходящей категории ?
+                    <button type="button" id="btn-addcatmodal" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Давайте создадим...</button>
+                </div>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-success" type="submit">Добавить</button>
+            </div>
+        </form>
+        <!--Start modal window-->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Добавление категории</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="modal-input-nameCat" placeholder="Название категории" required />
+                        </div>
+                        <div id="requestInfo" class="mb-3 text-white text-center">
+                            Тут информация о запросе
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="CloseModal()" data-bs-dismiss="modal">Закрыть</button>
+                        <button type="button" class="btn modal-btn-add" onclick="AddCategoryFromModal()">Создать</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End modal window-->
+    </div>
+</div>

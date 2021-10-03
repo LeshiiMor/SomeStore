@@ -1,0 +1,17 @@
+﻿@model SomeStore.ViewModels.AdminAccountsViewModel
+@{ 
+    ViewData["Title"] = "Панель управления";
+}
+<div class="admin-block admin-section">
+    <div id="admin-navbar" class="admin-block">
+        <ul class="admin-nav-list">
+            @if (User.IsInRole("admin"))
+            {<li class="admin-nav-item cab-active"><a class="admin-nav-link" data-href="/Manage/Accounts">Аккануты</a></li>}
+            <li class="admin-nav-item"><a class="admin-nav-link" data-href="/Manage/Products">Продукты</a></li>
+            <li class="admin-nav-item"><a class="admin-nav-link" data-href="/Manage/Orders">Заказы</a></li>
+        </ul>
+    </div>
+    <div id="admin-contentblock" class="admin-block ">
+        @{ Html.RenderPartialAsync("_Accounts",Model);}
+    </div>
+</div>

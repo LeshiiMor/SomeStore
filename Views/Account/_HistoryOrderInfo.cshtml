@@ -1,0 +1,54 @@
+﻿@model SomeStore.ViewModels.ManageOrdersViewModel
+<div class="container-fluid historder-cont">
+    @if (Model.Orders.Count() > 0)
+    {
+        @foreach (var prod in Model.Orders)
+        {
+    <div class="row cart-row" data-prodid="@prod.ProductId">
+        <div class="col-4 cart-col">
+            <div class="cart-item-img-cont">
+                <img class="cart-item-img img-fluid rounded" src="@prod.Product.ImageURL" />
+            </div>
+        </div>
+        <div class="col-5 cart-col">
+            <div class="cart-item-dis">
+                <h5><a asp-controller="Product" asp-action="ProductCard" asp-route-id="@prod.Product.Id">@prod.Product.Name</a></h5>
+                <p class="cart-disProd">
+                    @prod.Product.Description
+                </p>
+            </div>
+        </div>
+        <div class="col-3 cart-col">
+            <div class="cart-item-btn-block">
+                <div class="cart-item-btn-block-price">
+                    <div class="cart-price-block text-center">Цена : @prod.FinalPrice р.</div>
+                </div>
+            </div>
+        </div>
+        @if (prod.Status == 0)
+        {
+            <span class="p-1 rounded-pill text-white bg-warning">
+                На рассмотрении
+            </span>
+        }
+        else if (prod.Status == 1)
+        {
+            <span class="p-1 rounded-pill text-white bg-success">
+                Принят
+            </span>
+        }
+        else if (prod.Status ==2)
+        {
+            <span class="p-1 rounded-pill text-white bg-danger">
+                Отказ
+            </span>
+        }
+    </div>
+
+        }
+    }
+    else
+    {
+        <h4 class="text-center">Пусто</h4>
+    }
+</div>

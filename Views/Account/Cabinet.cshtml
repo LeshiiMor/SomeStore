@@ -1,0 +1,25 @@
+﻿@model SomeStore.ViewModels.PersonalInfoViewModel
+@{ 
+    ViewData["Title"] = "Личный кабинет";
+}
+<div class="row">
+    <div class="col text-center m-4">
+        <h1>Личный кабинет</h1>
+    </div>
+</div>
+<div class="row cab-block">
+    <div class="col-4 cab-left">
+        <ul class="nav flex-column text-center">
+            <li class="nav-item cab-item">
+                <a class="nav-link cab-link cab-active" data-href="/Account/PersonalInfo">Персональная информация</a>
+            </li>
+            <li class="nav-item cab-item">
+                <a class="nav-link cab-link" data-href="/Account/AuthInfo">Информация для входа</a>
+            </li>
+            <li class="nav-item cab-item">
+                <a class="nav-link cab-link" data-href="/Account/HistoryOrderInfo">История покупок</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col cab-right">@{Html.RenderPartialAsync("_PersonalInfo",Model);}</div>
+</div>

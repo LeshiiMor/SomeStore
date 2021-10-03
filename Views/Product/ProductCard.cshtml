@@ -1,0 +1,30 @@
+﻿@model Product
+@{
+    ViewData["Title"] = Model.Name;
+}
+<div class="container-fluid product-cont-info">
+    <div class="row">
+        <div class="col text-center">
+            <img src="@Model.ImageURL" title="@Model.Name" class="product-card-img" /><br />
+            <input type="text" id="productCardID" value="@Model.Id" hidden />
+            <button class="btn btn-success btn-buy">В корзину</button>
+        </div>
+        <div class="col">
+            <h1 class="text-center">@Model.Name</h1>
+            <p>@Model.Description</p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid d-flex justify-content-center">
+    <!--start Toast -->
+    <div class="toast  text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                Hello, world! This is a toast message.
+            </div>
+            <button type="button" class="btn-close-toast" data-bs-dismiss="toast" aria-label="Close">X</button>
+        </div>
+    </div>
+
+    <!--end  Toast -->
+</div>

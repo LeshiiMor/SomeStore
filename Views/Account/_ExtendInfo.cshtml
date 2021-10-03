@@ -1,0 +1,21 @@
+﻿@model string
+<div class="extendInfo-block">
+    <h1 class="m-5">Еще чуть-чуть...</h1>
+    <form id="moreInfoUser">
+        <div class="login-form-block mb-3">
+            <input type="text" class="login-input form-control" placeholder="Имя"/>
+        </div>
+        <div class="login-form-block mb-3">
+            <input type="text" class="login-input form-control" placeholder="Фамилия"/>
+        </div>
+        <div class="login-form-block mb-3">
+            <input type="text" class="login-input form-control" placeholder="Отчество"/>
+        </div>
+        <div class="login-form-block mb-3">
+            <input type="text" id="inp-phone" class="login-input form-control" onchange="EditPhone()" placeholder="Мобильный телефон"/>
+        </div>
+        <div class="login-form-block mb-3">
+            <button type="button" class="btn login-btn" onclick="AddMoreInfoUser()">Сохранить</button>
+        </div>
+    </form>
+</div>
